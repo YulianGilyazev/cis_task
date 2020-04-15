@@ -12,10 +12,16 @@ class PhoneDirectory:
         self.dict_name[name] = phone
 
     def find_by_name(self, name):
-        return self.dict_name[name]
+        if name in self.dict_name:
+            return self.dict_name[name]
+        else:
+            raise Exception('this name is not in the directory')
 
     def find_by_phone(self, phone):
-        return self.dict_phone[phone]
+        if phone in self.dict_phone:
+            return self.dict_phone[phone]
+        else:
+            raise Exception('this phone number is not in the directory')
 
     def find_by_first_numbers(self, first_nums):
         numbers = self.dict_phone.keys()
@@ -34,15 +40,3 @@ class PhoneDirectory:
                 suitable_names.append(self.dict_phone[number])
         return suitable_names
 
-
-def test():
-    d = PhoneDirectory()
-    d.insert('123', 'ivan')
-    d.insert('345', 'kolya')
-    print(d.find_by_phone('123'))
-    d.insert('124', 'petr')
-    print(d.find_by_template('1**'))
-
-
-if __name__ == '__main__':
-    test()
